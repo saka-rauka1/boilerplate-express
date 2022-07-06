@@ -1,6 +1,8 @@
 require('dotenv').config();
+require('body-parser');
 
 let express = require('express');
+let bodyParser = require('body-parser');
 let app = express();
 console.log("Hello World");
 
@@ -8,6 +10,8 @@ app.use((req, res, next) => {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (GET, res) => {
     res.sendFile(__dirname + "/views/index.html")
